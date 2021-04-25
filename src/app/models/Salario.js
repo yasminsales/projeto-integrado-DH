@@ -13,6 +13,4 @@ class Salario extends Model {
     )};
 }
 
-// Renda.Usuario = Renda.hasOne(Usuarios); 
-
 export default Salario;
