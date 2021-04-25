@@ -19,5 +19,20 @@ class RendaController {
 			valor: 1
 		});
 	}
-}
+
+    async update(request, response) {
+		const { Renda, } = request.body;
+
+		console.log("update usuarioId: " + request.usuarioId);
+		const usuario = await Usuario.findByPk(request.usuarioId);
+
+		if (email && email !== usuario.email) {
+			const usuarioExists = await Usuario.findOne({ where: { email  } } );
+
+			if (usuarioExists) {
+				return response.status(400).json({ error: 'Usuário já existe!'})
+			}
+		}
+}}
+
 export default new RendaController();
