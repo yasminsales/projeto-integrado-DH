@@ -21,18 +21,31 @@ class RendaController {
 	}
 
     async update(request, response) {
-		const { Renda, } = request.body;
 
-		console.log("update usuarioId: " + request.usuarioId);
-		const usuario = await Usuario.findByPk(request.usuarioId);
+		const salario = await Salario.findByPk(request.body.id); 	
+        request.body.usuario = request.usuarioId;
 
-		if (email && email !== usuario.email) {
-			const usuarioExists = await Usuario.findOne({ where: { email  } } );
+        const {salarioAtualizado, valor_extra} = await salario.update(request.body);
 
-			if (usuarioExists) {
-				return response.status(400).json({ error: 'Usuário já existe!'})
-			}
-		}
-}}
+        return response.json({
+			salarioAtualizado,
+			valor_extra
+		});
+    }     
+
+    async query(request, response) {
+		const salarios = await Salario.findAll({usuario: request.usuarioId}); 	
+
+        return response.json(salarios);
+    }   
+    async delete(request, response) {
+		const salario = await Salario.findByPk(request.body.id); 	
+        salario.destroy();
+
+        return response.json({success: true});
+    }  
+    
+    
+}
 
 export default new RendaController();

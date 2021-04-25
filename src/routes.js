@@ -13,5 +13,8 @@ routes.use(authMiddleware);
 
 routes.put('/usuarios', UsuarioController.update);
 routes.post('/renda', RendaController.store);
+routes.put('/renda', RendaController.update);
+routes.get('/renda', RendaController.query);
+routes.delete('/renda', RendaController.delete);
 
 export default routes;
