@@ -22,13 +22,13 @@ class RendaController {
 
     async update(request, response) {
 
-		const salario = await Salario.findByPk(request.body.id); 	
+		const salarioEntity = await Salario.findByPk(request.body.id); 	
         request.body.usuario = request.usuarioId;
 
-        const {salarioAtualizado, valor_extra} = await salario.update(request.body);
+        const {salario, valor_extra} = await salarioEntity.update(request.body);
 
         return response.json({
-			salarioAtualizado,
+			salario,
 			valor_extra
 		});
     }     
